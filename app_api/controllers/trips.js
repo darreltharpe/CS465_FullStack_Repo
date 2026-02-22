@@ -12,7 +12,7 @@ const tripsList = async (req, res) => {
 
         // Uncomment the following line to show results of query
         // on the console
-        // console.log(q);
+        console.log(q);
 
     if(!q)
     { // Database returned no data

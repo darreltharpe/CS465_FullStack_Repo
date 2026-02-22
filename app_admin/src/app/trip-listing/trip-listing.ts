@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TripCard } from '../trip-card/trip-card';
 
@@ -6,6 +6,7 @@ import { Trip } from '../models/trip';
 import { TripData } from '../services/trip-data';
 
 import { Router } from '@angular/router';
+import { Authentication } from '../services/authentication';
 
 @Component({
   selector: 'app-trip-listing',
@@ -17,12 +18,14 @@ import { Router } from '@angular/router';
 })
 export class TripListing implements OnInit {
   
-  trips!: Trip[];
+  trips: Trip[] = [];
   message: string = '';
 
   constructor(
     private tripData: TripData,
-    private router: Router
+    private router: Router,
+    private cd: ChangeDetectorRef,
+    private authentication: Authentication
     ) {
     console.log('trip-listing constructor');
   }
@@ -31,11 +34,18 @@ export class TripListing implements OnInit {
     this.router.navigate(['add-trip']);
   }
 
+  public isLoggedIn()
+  {
+    return this.authentication.isLoggedIn();
+  }
+
   private getStuff(): void {
     this.tripData.getTrips()
       .subscribe({
         next: (value: any) => {
           this.trips = value;
+          this.cd.detectChanges();
+          console.log('data recieved', value);
           if(value.length > 0)
           {
             this.message = 'There are ' + value.length + ' trips available.';
@@ -52,7 +62,7 @@ export class TripListing implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('ngOnInit');
+    console.log('ngOnInit fired');
     this.getStuff();
   }
 }
