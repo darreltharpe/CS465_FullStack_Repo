@@ -14,6 +14,7 @@ JSON, or Javascript Object Notation, is a format used for transfering data, whil
     
     Provide instances in the full stack process when you refactored code to improve functionality and efficiencies, and name the benefits that come from reusable user interface (UI) components.
 
+One of the earliest most notable refactors was done to the Express HTML travel page, involving both moving the header and footer to reusable Handlebars code, and altering the trip listings to pull from the database rather than display static listings. The app.html page was also refactored a few times, once to pull directly from trip listings, then to operate through a router outlet. Reusable user interface code speeds up development, improves readability and maintainability, allows for greater consistency, and simplifies testing, debugging and refactoring.
 
     Methods for request and retrieval necessitate various types of API testing of endpoints, in addition to the difficulties of testing with added layers of security. Explain your understanding of methods, endpoints, and security in a full stack application.
     
